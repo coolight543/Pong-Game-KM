@@ -40,11 +40,8 @@ public class PongGame extends JPanel implements MouseMotionListener {
         slow = new SlowDown(100,200,80,80);
         speed = new Speedup(200,100,90,80);
         wall = new Wall(100,300,100,50,Color.WHITE);
-        myPaddle = new Paddle(0, 300,50,9,Color.WHITE);
-        rightwall = new Wall(600,0,240,10,Color.WHITE);
-        topwall = new Wall(10,10,10,610,Color.WHITE);
-        bottomwall = new Wall(0,220,10,610,Color.WHITE);
-        leftwall = new Wall(10,10,240,10,Color.WHITE);
+        myPaddle = new Paddle(20, 300,50,9,Color.WHITE);
+        
     }
 
     // precondition: None
@@ -76,8 +73,7 @@ public class PongGame extends JPanel implements MouseMotionListener {
         speed.draw(g);
         wall.draw(g);
         myPaddle.draw(g);
-        rightwall.draw(g);
-
+        
     }
 
     // precondition: all required visual components are intialized to non-null
@@ -86,15 +82,24 @@ public class PongGame extends JPanel implements MouseMotionListener {
     public void gameLogic() {
         //add commands here to make the game play propperly
         ball.moveBall();
+     
         aiPaddle.moveY(ball.getY());
 
         if (aiPaddle.isTouching(ball)) {
            ball.reverseX();
         }
+        if (myPaddle.isTouching(ball))
+        {
+            ball.reverseX();
+        }
+        ball.bounceOffwalls(460, 0);
+        //if ()
+       
  
         pointScored();
-
-    }
+ 
+   // }
+}
 
     // precondition: ball is a non-null object that exists in the world
     // postcondition: determines if either ai or the player score needs to be
