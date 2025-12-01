@@ -18,10 +18,6 @@ public class PongGame extends JPanel implements MouseMotionListener {
     private Speedup speed;
     private Wall wall;
     private Paddle myPaddle;
-    private Wall rightwall;
-    private Wall topwall; 
-    private Wall bottomwall;
-    private Wall leftwall;
 
     public PongGame() {
 
@@ -31,7 +27,7 @@ public class PongGame extends JPanel implements MouseMotionListener {
         pScore.setBounds(280, 440, 20, 20);
         aiScore.setBounds(360, 440, 20, 20);
         pScore.setVisible(true);
-        aiScore.setVisible(true);
+        aiScore.setVisible(true); 
         userMouseY = 0;
         addMouseMotionListener(this);
         ball = new Ball(200, 200, 10, 3, Color.YELLOW, 10);
@@ -82,6 +78,7 @@ public class PongGame extends JPanel implements MouseMotionListener {
     public void gameLogic() {
         //add commands here to make the game play propperly
         ball.moveBall();
+        myPaddle.moveY(userMouseY);
      
         aiPaddle.moveY(ball.getY());
 
@@ -91,6 +88,15 @@ public class PongGame extends JPanel implements MouseMotionListener {
         if (myPaddle.isTouching(ball))
         {
             ball.reverseX();
+        }
+        if (speed.isTouching(ball))
+        {
+            ball.setChangeX(15);
+        }
+        if (slow.isTouching(ball))
+        {
+            ball.setChangeX(5);
+
         }
         ball.bounceOffwalls(460, 0);
         //if ()
@@ -108,6 +114,17 @@ public class PongGame extends JPanel implements MouseMotionListener {
     // pixels) and the ai scores
     // if the ball goes off the left edge (0)
     public void pointScored() {
+        if (ball.getX()<0)
+        {
+            aiScore++;
+            ball.setX(240);
+
+        }
+        if (ball.getX()>640)
+        {
+            playerScore++;
+            ball.setX(240);
+        }
 
     }
 
