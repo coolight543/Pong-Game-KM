@@ -96,11 +96,11 @@ public class PongGame extends JPanel implements MouseMotionListener {
         }
         if (speed.isTouching(ball))
         {
-            ball.setChangeX(15);
+            ball.setChangeX(ball.getChangeX()*1.05);
         }
         if (slow.isTouching(ball))
         {
-            ball.setChangeX(5);
+            ball.setChangeX(ball.getChangeX()*0.95);
         }
         ball.bounceOffwalls(460, 0);
         pointScored();
