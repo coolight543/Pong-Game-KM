@@ -82,10 +82,15 @@ public class PongGame extends JPanel implements MouseMotionListener {
      
         aiPaddle.moveY(ball.getY());
 
-        if (aiPaddle.isTouching(ball)) {
-           ball.reverseX();
+        if (aiPaddle.isTouching(ball)) 
+            {
+                ball.setChangeX(-10);
         }
         if (myPaddle.isTouching(ball))
+        {
+            ball.setChangeX(10);
+        }
+        if (wall.isTouching(ball))
         {
             ball.reverseX();
         }
@@ -96,16 +101,10 @@ public class PongGame extends JPanel implements MouseMotionListener {
         if (slow.isTouching(ball))
         {
             ball.setChangeX(5);
-
         }
         ball.bounceOffwalls(460, 0);
-        //if ()
-       
- 
         pointScored();
- 
-   // }
-}
+ }
 
     // precondition: ball is a non-null object that exists in the world
     // postcondition: determines if either ai or the player score needs to be
@@ -120,14 +119,13 @@ public class PongGame extends JPanel implements MouseMotionListener {
             ball.setX(240);
 
         }
-        if (ball.getX()>640)
+        if (ball.getX()>620)
         {
             playerScore++;
             ball.setX(240);
         }
 
     }
-
     // you do not need to edit the below methods, but please do not remove them as
     // they are required for the program to run.
     @Override
